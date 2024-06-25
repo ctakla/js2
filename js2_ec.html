@@ -1,0 +1,62 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>State Select EC</title>
+<style>
+	#stateList {border: 1px solid black; width: 200px; margin-top: 10px; padding: 10px;}
+	label {display: block; float: left; margin: 10px;}
+</style>
+</head>
+<body>
+        <label for="states">Select a state:</label>
+	<select id="states" size="10"></select>
+	<button class="add" type="button" onclick="addState()">Add State</button>
+	<div id="stateList"><ol></ol></div>
+	<button type="button" onclick="clearStates()">Clear States</button>
+
+ <script>
+
+const states = [
+                'Alabama', 'California', 'Connecticut', 'Delaware', 'Florida', 'Maryland', 'Montana', 'Nebraska', 'Nevada', 'Wyoming'
+		];
+
+	window.onload = function() { restoreSelect();};
+	function restoreSelect() {
+	const select = document.getElementById('states');
+	select.innerHTML = '';
+	states.forEach((state, index) => {
+                const option = document.createElement('option');
+                option.value = state;
+                option.text = state;
+                if (index === 0) {
+                    option.selected = true;
+			}
+                select.appendChild(option);
+		});
+        };
+
+        function addState() {
+            const select = document.getElementById('states');
+            const selectedState = select.value;
+
+		for (let i = 0; i < select.options.length; i++) {
+			if (select.options[i].value === selectedState) {
+			select.remove(i);
+			break;
+			}
+		}
+            const stateList = document.getElementById('stateList').getElementsByTagName('ol')[0];
+            const stateDiv = document.createElement('li');
+            stateDiv.textContent = selectedState;
+            stateList.appendChild(stateDiv);
+        }
+
+        function clearStates() {
+            const stateList = document.getElementById('stateList').getElementsByTagName('ol')[0];
+            stateList.innerHTML = '';
+
+	restoreSelect();
+        }
+    </script>
+</body>
+</html>

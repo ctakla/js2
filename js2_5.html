@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>State Select</title>
+<style>
+	#stateList {border: 1px solid black; width: 200px; margin-top: 10px; padding: 10px;}
+	label {display: block; float: left; margin: 10px;}
+</style>
+</head>
+<body>
+        <label for="states">Select a state:</label>
+	<select id="states" size="10"></select>
+	<button class="add" type="button" onclick="addState()">Add State</button>
+	<div id="stateList"></div>
+	<button type="button" onclick="clearStates()">Clear States</button>
+
+ <script>
+	window.onload = function() {
+	const states = [
+                'Alabama', 'California', 'Connecticut', 'Delaware', 'Florida', 'Maryland', 'Montana', 'Nebraska', 'Nevada', 'Wyoming'
+		];
+
+	const select = document.getElementById('states');
+	states.forEach((state, index) => {
+                const option = document.createElement('option');
+                option.value = state;
+                option.text = state;
+                if (index === 0) {
+                    option.selected = true;
+			}
+                select.appendChild(option);
+		});
+        };
+
+        function addState() {
+            const select = document.getElementById('states');
+            const selectedState = select.value;
+            const stateList = document.getElementById('stateList');
+            const stateDiv = document.createElement('div');
+            stateDiv.textContent = selectedState;
+            stateList.appendChild(stateDiv);
+        }
+
+        function clearStates() {
+            const stateList = document.getElementById('stateList');
+            stateList.innerHTML = '';
+        }
+    </script>
+</body>
+</html>
